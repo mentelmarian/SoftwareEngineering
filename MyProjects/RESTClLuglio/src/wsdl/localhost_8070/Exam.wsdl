@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soapservluglio.mycompany.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ExamImplService" targetNamespace="http://soapservluglio.mycompany.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soapservluglio.mycompany.com/" elementFormDefault="unqualified" targetNamespace="http://soapservluglio.mycompany.com/" version="1.0">
+
+  <xs:element name="getTicket" type="tns:getTicket"/>
+
+  <xs:element name="getTicketResponse" type="tns:getTicketResponse"/>
+
+  <xs:element name="seller" type="tns:seller"/>
+
+  <xs:element name="ticket" type="tns:ticket"/>
+
+  <xs:complexType name="getTicket">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTicketResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:ticket"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ticket">
+    <xs:sequence>
+      <xs:element name="matchId" type="xs:int"/>
+      <xs:element name="price" type="xs:float"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="sellers" nillable="true" type="tns:seller"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="seller">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getTicket">
+    <wsdl:part element="tns:getTicket" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTicketResponse">
+    <wsdl:part element="tns:getTicketResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Exam">
+    <wsdl:operation name="getTicket">
+      <wsdl:input message="tns:getTicket" name="getTicket">
+    </wsdl:input>
+      <wsdl:output message="tns:getTicketResponse" name="getTicketResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ExamImplServiceSoapBinding" type="tns:Exam">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getTicket">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTicket">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTicketResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExamImplService">
+    <wsdl:port binding="tns:ExamImplServiceSoapBinding" name="ExamImplPort">
+      <soap:address location="http://localhost:8070/Exam"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
