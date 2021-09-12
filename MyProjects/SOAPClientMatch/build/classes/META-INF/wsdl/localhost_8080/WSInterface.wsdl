@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soapservermatch.mycompany.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="WSImplService" targetNamespace="http://soapservermatch.mycompany.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soapservermatch.mycompany.com/" elementFormDefault="unqualified" targetNamespace="http://soapservermatch.mycompany.com/" version="1.0">
+
+  <xs:element name="getMatches" type="tns:getMatches"/>
+
+  <xs:element name="getMatchesResponse" type="tns:getMatchesResponse"/>
+
+  <xs:element name="helloMatch" type="tns:helloMatch"/>
+
+  <xs:element name="helloMatchResponse" type="tns:helloMatchResponse"/>
+
+  <xs:complexType name="getMatches">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getMatchesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:MatchMap"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MatchMap">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="entry" type="tns:MatchEntry"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MatchEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:string"/>
+      <xs:element minOccurs="0" name="home" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="match" type="tns:Match"/>
+      <xs:element minOccurs="0" name="result" type="xs:string"/>
+      <xs:element minOccurs="0" name="visitor" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Match">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="date" type="xs:string"/>
+      <xs:element minOccurs="0" name="home" type="xs:string"/>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="result" type="xs:string"/>
+      <xs:element minOccurs="0" name="visitor" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="helloMatch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:Match"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="helloMatchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="helloMatchResponse">
+    <wsdl:part element="tns:helloMatchResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="helloMatch">
+    <wsdl:part element="tns:helloMatch" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMatchesResponse">
+    <wsdl:part element="tns:getMatchesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMatches">
+    <wsdl:part element="tns:getMatches" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WSInterface">
+    <wsdl:operation name="getMatches">
+      <wsdl:input message="tns:getMatches" name="getMatches">
+    </wsdl:input>
+      <wsdl:output message="tns:getMatchesResponse" name="getMatchesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="helloMatch">
+      <wsdl:input message="tns:helloMatch" name="helloMatch">
+    </wsdl:input>
+      <wsdl:output message="tns:helloMatchResponse" name="helloMatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSImplServiceSoapBinding" type="tns:WSInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getMatches">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getMatches">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMatchesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="helloMatch">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="helloMatch">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloMatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSImplService">
+    <wsdl:port binding="tns:WSImplServiceSoapBinding" name="WSImplPort">
+      <soap:address location="http://localhost:8080/WSInterface"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
